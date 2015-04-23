@@ -18,10 +18,34 @@
 		<exception-type>java.lang.Exception</exception-type>
 		<location>/Error.html</location>
 	</error-page>
-	
+
 	<resource-ref>
 		<res-ref-name>jdbc/MySQLDB</res-ref-name>
 		<res-auth>Container</res-auth>
 	</resource-ref>
+
+	<security-role>
+		<role-name>myRole</role-name>
+	</security-role>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>all</web-resource-name>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>myRole</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/login.jsp</form-login-page>
+			<form-error-page>/fail_login.html</form-error-page>
+		</form-login-config>
+	</login-config>
 
 </web-app>
